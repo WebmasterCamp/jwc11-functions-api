@@ -1,64 +1,73 @@
-[debug] [2019-03-03T04:00:13.102Z] ----------------------------------------------------------------------
-[debug] [2019-03-03T04:00:13.106Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve --only functions
-[debug] [2019-03-03T04:00:13.106Z] CLI Version:   6.2.2
-[debug] [2019-03-03T04:00:13.107Z] Platform:      darwin
-[debug] [2019-03-03T04:00:13.107Z] Node Version:  v10.13.0
-[debug] [2019-03-03T04:00:13.110Z] Time:          Sun Mar 03 2019 11:00:13 GMT+0700 (Indochina Time)
-[debug] [2019-03-03T04:00:13.112Z] ----------------------------------------------------------------------
+[debug] [2019-03-14T05:23:26.834Z] ----------------------------------------------------------------------
+[debug] [2019-03-14T05:23:26.836Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve --only functions
+[debug] [2019-03-14T05:23:26.837Z] CLI Version:   6.5.0
+[debug] [2019-03-14T05:23:26.837Z] Platform:      darwin
+[debug] [2019-03-14T05:23:26.837Z] Node Version:  v10.13.0
+[debug] [2019-03-14T05:23:26.838Z] Time:          Thu Mar 14 2019 12:23:26 GMT+0700 (Indochina Time)
+[debug] [2019-03-14T05:23:26.838Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2019-03-03T04:00:13.131Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2019-03-03T04:00:13.132Z] > authorizing via signed-in user
-[debug] [2019-03-03T04:00:13.132Z] [iam] checking project jwcxi-registration for permissions ["firebase.projects.get"]
-[debug] [2019-03-03T04:00:13.134Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2019-03-03T04:00:13.135Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+[debug] [2019-03-14T05:23:26.847Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-03-14T05:23:26.847Z] > authorizing via signed-in user
+[debug] [2019-03-14T05:23:26.847Z] [iam] checking project jwcxi-registration for permissions ["firebase.projects.get"]
+[debug] [2019-03-14T05:23:26.850Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-03-14T05:23:26.851Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
  <request body omitted>
-[debug] [2019-03-03T04:00:13.378Z] <<< HTTP RESPONSE 200
-[debug] [2019-03-03T04:00:13.389Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/jwcxi-registration:testIamPermissions  
+[debug] [2019-03-14T05:23:27.111Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-14T05:23:27.123Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/jwcxi-registration:testIamPermissions  
 
-[debug] [2019-03-03T04:00:14.796Z] <<< HTTP RESPONSE 200
-[debug] [2019-03-03T04:00:14.799Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/jwcxi-registration  
+[debug] [2019-03-14T05:23:28.712Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-14T05:23:28.714Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/jwcxi-registration  
  
-[debug] [2019-03-03T04:00:16.126Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-14T05:23:30.024Z] <<< HTTP RESPONSE 200
 [info] 
 [info] === Serving from '/Users/pepe_witch/work/project/jwc11-api'...
 [info] 
 [info] i  functions: Preparing to emulate functions.
-[debug] [2019-03-03T04:00:17.295Z] Fetching environment
-[debug] [2019-03-03T04:00:17.301Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/531875178203:getServerAppConfig  
+[debug] [2019-03-14T05:23:31.170Z] Fetching environment
+[debug] [2019-03-14T05:23:31.174Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/531875178203:getServerAppConfig  
  
-[debug] [2019-03-03T04:00:17.653Z] <<< HTTP RESPONSE 200
-[debug] [2019-03-03T04:00:17.654Z] Starting @google-cloud/functions-emulator
-[debug] [2019-03-03T04:00:19.721Z] Parsing function triggers
+[debug] [2019-03-14T05:23:31.579Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-14T05:23:31.580Z] Starting @google-cloud/functions-emulator
+[debug] [2019-03-14T05:23:33.640Z] Parsing function triggers
+[info] ✔  functions: info: http://localhost:5000/jwcxi-registration/us-central1/info
 [info] ✔  functions: campers: http://localhost:5000/jwcxi-registration/us-central1/campers
+[info] ✔  functions: allCampers: http://localhost:5000/jwcxi-registration/us-central1/allCampers
 [info] Shutting down...
 [info] Shutting down...
-[debug] [2019-03-03T04:01:05.453Z] ----------------------------------------------------------------------
-[debug] [2019-03-03T04:01:05.468Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve --only functions
-[debug] [2019-03-03T04:01:05.469Z] CLI Version:   6.2.2
-[debug] [2019-03-03T04:01:05.469Z] Platform:      darwin
-[debug] [2019-03-03T04:01:05.469Z] Node Version:  v10.13.0
-[debug] [2019-03-03T04:01:05.471Z] Time:          Sun Mar 03 2019 11:01:05 GMT+0700 (Indochina Time)
-[debug] [2019-03-03T04:01:05.472Z] ----------------------------------------------------------------------
+[debug] [2019-03-15T12:54:35.107Z] ----------------------------------------------------------------------
+[debug] [2019-03-15T12:54:35.111Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve --only functions
+[debug] [2019-03-15T12:54:35.111Z] CLI Version:   6.5.0
+[debug] [2019-03-15T12:54:35.112Z] Platform:      darwin
+[debug] [2019-03-15T12:54:35.112Z] Node Version:  v10.13.0
+[debug] [2019-03-15T12:54:35.114Z] Time:          Fri Mar 15 2019 19:54:35 GMT+0700 (Indochina Time)
+[debug] [2019-03-15T12:54:35.114Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2019-03-03T04:01:05.512Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2019-03-03T04:01:05.512Z] > authorizing via signed-in user
-[debug] [2019-03-03T04:01:05.512Z] [iam] checking project jwcxi-registration for permissions ["firebase.projects.get"]
-[debug] [2019-03-03T04:01:05.520Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/jwcxi-registration:testIamPermissions  
+[debug] [2019-03-15T12:54:35.136Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-03-15T12:54:35.136Z] > authorizing via signed-in user
+[debug] [2019-03-15T12:54:35.137Z] [iam] checking project jwcxi-registration for permissions ["firebase.projects.get"]
+[debug] [2019-03-15T12:54:35.140Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-03-15T12:54:35.141Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-03-15T12:54:35.512Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-15T12:54:35.523Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/jwcxi-registration:testIamPermissions  
 
-[debug] [2019-03-03T04:01:07.126Z] <<< HTTP RESPONSE 200
-[debug] [2019-03-03T04:01:07.128Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/jwcxi-registration  
+[debug] [2019-03-15T12:54:37.218Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-15T12:54:37.220Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/jwcxi-registration  
  
-[debug] [2019-03-03T04:01:08.431Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-15T12:54:38.770Z] <<< HTTP RESPONSE 200
 [info] 
 [info] === Serving from '/Users/pepe_witch/work/project/jwc11-api'...
 [info] 
 [info] i  functions: Preparing to emulate functions.
-[debug] [2019-03-03T04:01:09.463Z] Fetching environment
-[debug] [2019-03-03T04:01:09.465Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/531875178203:getServerAppConfig  
+[debug] [2019-03-15T12:54:40.037Z] Fetching environment
+[debug] [2019-03-15T12:54:40.041Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/531875178203:getServerAppConfig  
  
-[debug] [2019-03-03T04:01:09.938Z] <<< HTTP RESPONSE 200
-[debug] [2019-03-03T04:01:09.939Z] Starting @google-cloud/functions-emulator
-[debug] [2019-03-03T04:01:12.006Z] Parsing function triggers
+[debug] [2019-03-15T12:54:40.829Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-15T12:54:40.831Z] Starting @google-cloud/functions-emulator
+[debug] [2019-03-15T12:54:42.901Z] Parsing function triggers
+[info] ✔  functions: info: http://localhost:5000/jwcxi-registration/us-central1/info
 [info] ✔  functions: campers: http://localhost:5000/jwcxi-registration/us-central1/campers
+[info] ✔  functions: allCampers: http://localhost:5000/jwcxi-registration/us-central1/allCampers
+[info] Shutting down...
 [info] Shutting down...
 [info] Shutting down...
