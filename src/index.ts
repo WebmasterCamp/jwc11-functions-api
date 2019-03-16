@@ -1,7 +1,8 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import { Firestore } from "@google-cloud/firestore";
-import { Camper, Major } from "./type";
+import { Camper, Major, CamperSummary, Summary } from "./type";
+import moment from "moment-timezone";
 
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
@@ -102,12 +103,151 @@ export const info = functions.https.onRequest(async (req, res) => {
   }
 });
 
-export const allCampers = functions.https.onRequest(async (req, res) => {
+const getSummary = (data: Partial<Camper>[]): CamperSummary => {
+  const timezone = "Asia/Bangkok";
+  const date = moment()
+    .tz(timezone)
+    .year(2019)
+    .month(2)
+    .date(1)
+    .hour(0)
+    .minute(0)
+    .second(0)
+    .millisecond(0);
+  const authenticated: Summary[] = [];
+  const submitted: Summary[] = [];
+  const seperatedAuthenticated: Summary[] = [];
+  const seperatedSubmitted: Summary[] = [];
+  for (
+    let i = 0;
+    i <
+    Math.min(
+      20,
+      moment()
+        .tz(timezone)
+        .date() + 1
+    );
+    i++
+  ) {
+    const selectedDate = moment(date)
+      .tz(timezone)
+      .date(date.date() + i);
+    authenticated.push(
+      data
+        .filter(
+          e => e.createdAt && e.createdAt.toMillis() < selectedDate.valueOf()
+        )
+        .reduce(
+          (prev, curr) => {
+            if (curr.major) {
+              return { ...prev, [curr.major]: prev[curr.major] + 1 };
+            }
+            return prev;
+          },
+          {
+            date: selectedDate.toDate(),
+            design: 0,
+            content: 0,
+            marketing: 0,
+            programming: 0
+          }
+        )
+    );
+    seperatedAuthenticated.push(
+      data
+        .filter(
+          e =>
+            e.createdAt &&
+            e.createdAt.toMillis() < selectedDate.valueOf() &&
+            e.createdAt.toMillis() >
+              moment(selectedDate).tz(timezone).date(selectedDate.date() - 1).valueOf()
+        )
+        .reduce(
+          (prev, curr) => {
+            if (curr.major) {
+              return { ...prev, [curr.major]: prev[curr.major] + 1 };
+            }
+            return prev;
+          },
+          {
+            date: selectedDate.toDate(),
+            design: 0,
+            content: 0,
+            marketing: 0,
+            programming: 0
+          }
+        )
+    );
+    submitted.push(
+      data
+        .filter(
+          e =>
+            e.updatedAt &&
+            e.updatedAt.toMillis() < selectedDate.valueOf() &&
+            e.submitted
+        )
+        .reduce(
+          (prev, curr) => {
+            if (curr.major) {
+              return { ...prev, [curr.major]: prev[curr.major] + 1 };
+            }
+            return prev;
+          },
+          {
+            date: selectedDate.toDate(),
+            design: 0,
+            content: 0,
+            marketing: 0,
+            programming: 0
+          }
+        )
+    );
+    seperatedSubmitted.push(
+      data
+        .filter(
+          e =>
+            e.updatedAt &&
+            e.updatedAt.toMillis() < selectedDate.valueOf() &&
+            e.updatedAt.toMillis() >
+            moment(selectedDate).tz(timezone).date(selectedDate.date() - 1).valueOf() &&
+            e.submitted
+        )
+        .reduce(
+          (prev, curr) => {
+            if (curr.major) {
+              return { ...prev, [curr.major]: prev[curr.major] + 1 };
+            }
+            return prev;
+          },
+          {
+            date: selectedDate.toDate(),
+            design: 0,
+            content: 0,
+            marketing: 0,
+            programming: 0
+          }
+        )
+    );
+  }
+  return {
+    accumulate: {
+      authenticated,
+      submitted
+    },
+    seperate: {
+      authenticated: seperatedAuthenticated,
+      submitted: seperatedSubmitted
+    }
+  };
+};
+
+export const campersSummary = functions.https.onRequest(async (req, res) => {
   try {
     res.set("Access-Control-Allow-Origin", "*");
     const data = await getCampersList();
-    res.status(200).send(data);
+    res.status(200).send(getSummary(data));
   } catch (error) {
+    console.error(error);
     res.status(500).send({ error });
   }
 });

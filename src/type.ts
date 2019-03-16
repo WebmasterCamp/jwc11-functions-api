@@ -44,3 +44,22 @@ export type Camper = {
   submitted: boolean;
   updatedAt: Timestamp;
 };
+
+export interface Summary {
+  date: Date;
+  design: number;
+  content: number;
+  marketing: number;
+  programming: number;
+}
+
+export interface CamperSummary {
+  seperate: {
+    authenticated: Summary[];
+    submitted: Summary[];
+  };
+  accumulate: {
+    authenticated: Summary[];
+    submitted: Summary[];
+  };
+}
