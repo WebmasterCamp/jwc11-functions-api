@@ -15,7 +15,6 @@ admin.initializeApp({
 const firestore = new Firestore();
 const campersRef = firestore.collection("campers");
 
-let summary;
 let campers_list: Partial<Camper>[];
 
 const countSubmittedCampers = (data: Partial<Camper>[]) => {
@@ -41,24 +40,16 @@ const getCampersList = async () => {
 campersRef.onSnapshot(next => {
   const data = next.docs.map(doc => doc.data());
   campers_list = data;
-  summary = countSubmittedCampers(data);
 });
 
-export const campers = functions.https.onRequest((req, res) => {
-  res.set("Access-Control-Allow-Origin", "*");
-  // if (summary) {
-  //   res.status(200).send(summary);
-  // } else {
-  campersRef
-    .get()
-    .then(snapshot => {
-      const data = snapshot.docs.map(doc => doc.data());
-      res.status(200).send(countSubmittedCampers(data));
-    })
-    .catch(e => {
-      res.sendStatus(500);
-    });
-  // }
+export const campers = functions.https.onRequest(async (req, res) => {
+  try {
+    res.set("Access-Control-Allow-Origin", "*");
+    const data = await getCampersList();
+    res.status(200).send(countSubmittedCampers(data));
+  } catch (error) {
+    res.status(500).send({ error });
+  }
 });
 
 const getInfo = (data: Partial<Camper>[]) => {
@@ -160,7 +151,10 @@ const getSummary = (data: Partial<Camper>[]): CamperSummary => {
             e.createdAt &&
             e.createdAt.toMillis() < selectedDate.valueOf() &&
             e.createdAt.toMillis() >
-              moment(selectedDate).tz(timezone).date(selectedDate.date() - 1).valueOf()
+              moment(selectedDate)
+                .tz(timezone)
+                .date(selectedDate.date() - 1)
+                .valueOf()
         )
         .reduce(
           (prev, curr) => {
@@ -209,7 +203,10 @@ const getSummary = (data: Partial<Camper>[]): CamperSummary => {
             e.updatedAt &&
             e.updatedAt.toMillis() < selectedDate.valueOf() &&
             e.updatedAt.toMillis() >
-            moment(selectedDate).tz(timezone).date(selectedDate.date() - 1).valueOf() &&
+              moment(selectedDate)
+                .tz(timezone)
+                .date(selectedDate.date() - 1)
+                .valueOf() &&
             e.submitted
         )
         .reduce(
