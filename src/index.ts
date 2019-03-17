@@ -38,7 +38,13 @@ const getCampersList = async () => {
 };
 
 campersRef.onSnapshot(next => {
-  const data = next.docs.map(doc => doc.data());
+  const data = next.docs.map(doc => {
+    const d = doc.data() as Partial<Camper>;
+    if (!d.createdAt && d.updatedAt) {
+      d.createdAt = d.updatedAt;
+    }
+    return d;
+  });
   campers_list = data;
 });
 
