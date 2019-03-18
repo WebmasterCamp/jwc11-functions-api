@@ -1,7 +1,11 @@
 import { getCampersList } from "../model/camper";
 import { Camper, Major, CamperSummary, Summary } from "../type";
-import moment, { Moment } from "moment-TIMEZONE";
-import { TIMEZONE } from "../util";
+import moment, { Moment } from "moment-timezone";
+import {
+  TIMEZONE,
+  getStartRegistrationMoment,
+  getEndRegistrationMoment
+} from "../util";
 
 export const countSubmittedCampers = async () => {
   const data = await getCampersList();
@@ -47,18 +51,6 @@ export const getInfo = async () => {
   };
 };
 
-const getStartRegistrationMoment = () => {
-  return moment()
-    .tz(TIMEZONE)
-    .year(2019)
-    .month(2)
-    .date(1)
-    .hour(0)
-    .minute(0)
-    .second(0)
-    .millisecond(0);
-};
-
 const countSummary = (data: Partial<Camper>[], date: Moment) => {
   return data.reduce(
     (prev, curr) => {
@@ -84,12 +76,12 @@ export const getSummary = async (): Promise<CamperSummary> => {
   const submitted: Summary[] = [];
   const seperatedAuthenticated: Summary[] = [];
   const seperatedSubmitted: Summary[] = [];
-  const dateRange = Math.min(
-    20,
-    moment()
-      .tz(TIMEZONE)
-      .date() + 1
-  );
+  const dateRange =
+    getEndRegistrationMoment().valueOf() > moment().valueOf()
+      ? moment()
+          .tz(TIMEZONE)
+          .date() + 1
+      : 20;
   for (let i = 0; i < dateRange; i++) {
     const selectedDate = getStartRegistrationMoment().date(date.date() + i);
     authenticated.push(
