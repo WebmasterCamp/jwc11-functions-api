@@ -71,7 +71,7 @@ const countSummary = (data: Partial<Camper>[], date: Moment) => {
 
 export const getSummary = async (): Promise<CamperSummary> => {
   const data = await getCampersList();
-  const date = getStartRegistrationMoment();
+  const startDate = getStartRegistrationMoment();
   const authenticated: Summary[] = [];
   const submitted: Summary[] = [];
   const seperatedAuthenticated: Summary[] = [];
@@ -83,7 +83,7 @@ export const getSummary = async (): Promise<CamperSummary> => {
           .date() + 1
       : 20;
   for (let i = 0; i < dateRange; i++) {
-    const selectedDate = getStartRegistrationMoment().date(date.date() + i);
+    const selectedDate = getStartRegistrationMoment().date(startDate.date() + i);
     authenticated.push(
       countSummary(
         data.filter(
