@@ -12,7 +12,7 @@ export const campers = functions.https.onRequest(async (req, res) => {
     const x = readFileSync(join(__dirname,'..','campers.json'))
     // const x = await countSubmittedCampers()
     // writeFileSync('campers.json', JSON.stringify(x));
-    res.status(200).send(x);
+    res.status(200).send(JSON.parse(x.toString()));
   } catch (error) {
     res.status(500).send({ error });
   }
@@ -24,7 +24,7 @@ export const info = functions.https.onRequest(async (req, res) => {
     const x = readFileSync(join(__dirname,'..','info.json'))
     // const x = await getInfo()
     // writeFileSync('info.json', JSON.stringify(x));
-    res.status(200).send(x);
+    res.status(200).send(JSON.parse(x.toString()));
   } catch (error) {
     res.status(500).send({ error });
   }
@@ -36,7 +36,7 @@ export const campersSummary = functions.https.onRequest(async (req, res) => {
     const x = readFileSync(join(__dirname,'..','summary.json'))
     // const x = await getSummary()
     // writeFileSync('summary.json', JSON.stringify(x));
-    res.status(200).send(x);
+    res.status(200).send(JSON.parse(x.toString()));
   } catch (error) {
     res.status(500).send({ error });
   }
