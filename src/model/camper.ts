@@ -25,3 +25,20 @@ export const getCampersList = async () => {
     return data as Partial<Camper>[];
   }
 };
+
+export const getCampers = async (ids: string[]) => {
+  const snapshot = await campersRef.get();
+  const data = snapshot.docs.filter(e => ids.includes(e.id)).map(e => e.data());
+  return data as Partial<Camper>[];
+};
+
+// getCampersList().then(campers => {
+// fs.writeFileSync(
+//   "email.csv",
+//   campers
+//     .filter(e => !e.submitted && e.major && e.email)
+//     .map(e => e.email)
+//     .join(",")
+// );
+//   console.log(campers.filter(e => e.submitted && !e.major).map(e => e));
+// });

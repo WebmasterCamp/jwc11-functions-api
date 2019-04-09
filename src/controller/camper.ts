@@ -81,7 +81,7 @@ export const getSummary = async (): Promise<CamperSummary> => {
       ? moment()
           .tz(TIMEZONE)
           .date() + 1
-      : 20;
+      : 21;
   for (let i = 0; i < dateRange; i++) {
     const selectedDate = getStartRegistrationMoment().date(startDate.date() + i);
     authenticated.push(
